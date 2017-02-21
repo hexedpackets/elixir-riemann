@@ -1,0 +1,4 @@
+%{"earmark": {:hex, :earmark, "1.1.1", "433136b7f2e99cde88b745b3a0cfc3fbc81fe58b918a09b40fce7f00db4d8187", [:mix], []},
+  "ex_doc": {:hex, :ex_doc, "0.14.5", "c0433c8117e948404d93ca69411dd575ec6be39b47802e81ca8d91017a0cf83c", [:mix], [{:earmark, "~> 1.0", [hex: :earmark, optional: false]}]},
+  "exprotobuf": {:hex, :exprotobuf, "1.2.5", "fe398cc73bca7ab3cbd1c5d2c02eb69ff089d7af0927f88d15c135b105aa00b3", [:mix], [{:gpb, "~> 3.24", [hex: :gpb, optional: false]}]},
+  "gpb": {:hex, :gpb, "3.26.6", "cd0b7e29d896bc7650ccbc4b6681db6cbec7a9c6d8a3d5e0e8b9bee454377597", [:make, :rebar], []}}
