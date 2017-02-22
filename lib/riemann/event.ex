@@ -5,18 +5,25 @@ defmodule Riemann.Event do
       nil ->
         {:ok, hostname} = :inet.gethostname
         hostname
-      {:system, name} -> System.get_env(name)
-      val -> val
+      {:system, name} -> System.get_env(name) |> :erlang.list_to_binary()
+      val when is_binary(val) -> val
+      val when is_list(val) -> :erlang.list_to_binary()
     end
   end
 
-  def build(event) do
-    %{host: :erlang.list_to_binary(host()), time: :erlang.system_time(:seconds)}
+  def build(event) when is_map(event) do
+    %{host: host(), time: :erlang.system_time(:seconds)}
     |> Map.merge(event)
     |> Map.update(:attributes, [], fn attributes -> Enum.map(attributes, &build_attribute/1) end)
     |> set_metric()
     |> Map.to_list()
     |> Riemann.Protobuf.Event.new()
+  end
+
+  def build(event) do
+    event
+    |> Enum.into(%{})
+    |> build()
   end
 
   defp build_attribute({key, value}) do
