@@ -2,7 +2,7 @@ defmodule Riemann do
   @doc """
   Send a list of events synchronously.
   """
-  def submit(events) when is_list(events) do
+  def submit(events) when is_list(hd(events)) or is_map(hd(events)) do
     events
     |> events_to_msg
     |> Riemann.Client.submit
@@ -12,7 +12,7 @@ defmodule Riemann do
   @doc """
   Send a list of events asynchronously.
   """
-  def submit_async(events) when is_list(events) do
+  def submit_async(events) when is_list(hd(events)) or is_map(hd(events)) do
     events
     |> events_to_msg
     |> Riemann.Client.submit_async
